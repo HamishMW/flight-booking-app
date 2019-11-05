@@ -1,0 +1,22 @@
+{
+  "editor.formatOnSave": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact"
+  ],
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/design": true,
+    "**/*.sketch": true,
+    "**/*.studio": true
+  },
+  "html.format.enable": false,
+  "search.exclude": {
+    "**/bower_components": true,
+    "**/node_modules": true,
+    "**/build/*.js": true,
+    "index.*": true
+  }
+}

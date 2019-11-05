@@ -1,0 +1,39 @@
+{
+  "name": "flight-booking-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@reach/combobox": "^0.4.0",
+    "gsap": "^2.1.3",
+    "react": "^16.11.0",
+    "react-calendar": "^2.19.2",
+    "react-dom": "^16.11.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "react-transition-group": "^4.3.0",
+    "styled-components": "^4.4.0",
+    "three": "^0.109.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "echo add some tests",
+    "deploy": "firebase deploy --only hosting",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
