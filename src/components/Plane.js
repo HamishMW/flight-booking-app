@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { Scene, PerspectiveCamera, WebGLRenderer, AmbientLight, DirectionalLight } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { TweenLite, Power2 } from 'gsap/TweenLite';
+import gsap from 'gsap';
 import { useViewportSize } from 'hooks';
 import planeModel from 'assets/a320.glb';
 import { clean } from 'utils/three';
@@ -64,8 +64,8 @@ export default function Plane({ canvasHeight, ...props }) {
       modelRef.current.rotation.y = 5.2;
       modelRef.current.position.x = 200;
       cameraRef.current.position.y = -120;
-      TweenLite.to(modelRef.current.position, 2, { x: 0, ease: Power2.easeOut });
-      TweenLite.to(cameraRef.current.position, 2, { y: 65, ease: Power2.easeOut });
+      gsap.to(modelRef.current.position, 2, { x: 0, ease: 'power2.out' });
+      gsap.to(cameraRef.current.position, 2, { y: 65, ease: 'power2.out' });
       render();
     });
 
@@ -103,4 +103,8 @@ const PlaneCanvas = styled.canvas`
   right: 0;
   bottom: 0;
   left: 0;
+
+  &:focus {
+    outline: none;
+  }
 `;

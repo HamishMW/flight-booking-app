@@ -9,15 +9,14 @@ import { isVisible, reflow } from 'utils/transition';
 import FlightListItem from 'components/FlightListItem';
 import flightData from 'data/flights';
 import { TransitionGroup, Transition } from 'react-transition-group';
-import { TweenLite, Power2 } from 'gsap/TweenLite';
-import ScrollToPlugin from 'gsap/umd/ScrollToPlugin';
+import gsap from 'gsap';
+import ScrollToPlugin from 'gsap/ScrollToPlugin';
 import { formatMoney } from 'utils/currency';
 import { formatDateShort } from 'utils/date';
 import { useScrollRestore } from 'hooks';
 import locationData from 'data/locations';
 
-// Force the ScrollToPlugin to not get tree shaken
-window.__ScrollToPlugin = ScrollToPlugin;
+gsap.registerPlugin(ScrollToPlugin);
 
 export default function BookingFlights(props) {
   const { bookingDetails, departureFlight, returnFlight, dispatch } = useContext(AppContext);
@@ -69,7 +68,7 @@ export default function BookingFlights(props) {
 
   const handleFlightSelect = (flight, type, match) => {
     dispatch({ type, value: flight.id === match.id ? {} : flight });
-    TweenLite.to(wrapperRef.current, 0.4, { scrollTo: 0, ease: Power2.easeOut });
+    gsap.to(wrapperRef.current, 0.4, { scrollTo: 0, ease: 'power2.out' });
   };
 
   const handleSubmit = event => {

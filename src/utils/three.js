@@ -24,3 +24,15 @@ const cleanMaterial = material => {
     }
   }
 };
+
+export const returnSphericalCoordinates = (latitude, longitude, size, radius) => {
+  latitude = ((latitude - size.width) / size.width) * -180;
+  longitude = ((longitude - size.height) / size.height) * -90;
+
+  const outputRadius = Math.cos(longitude / 180 * Math.PI) * radius;
+  const x = Math.cos(latitude / 180 * Math.PI) * outputRadius;
+  const y = Math.sin(longitude / 180 * Math.PI) * radius;
+  const z = Math.sin(latitude / 180 * Math.PI) * outputRadius;
+
+  return { x, y, z };
+};

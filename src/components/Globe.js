@@ -18,7 +18,7 @@ import {
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import globeData from 'data/globe';
 import { useViewportSize } from 'hooks';
-import { clean } from 'utils/three';
+import { clean, returnSphericalCoordinates } from 'utils/three';
 
 function Globe({ globeRadius, mapSize, colours, alphas, status, collapsed, ...props }) {
   const viewportSize = useViewportSize();
@@ -38,10 +38,6 @@ function Globe({ globeRadius, mapSize, colours, alphas, status, collapsed, ...pr
         azimuthal: null,
         polar: null,
       },
-      target: {
-        azimuthal: null,
-        polar: null,
-      },
     }
   });
 
@@ -49,12 +45,9 @@ function Globe({ globeRadius, mapSize, colours, alphas, status, collapsed, ...pr
     main: null,
     globe: null,
     globeDots: null,
-    lines: null,
-    lineDots: null,
   });
 
   const animationsRef = useRef({
-    finishedIntro: false,
     dots: {
       current: 0,
       total: 170,
@@ -63,17 +56,6 @@ function Globe({ globeRadius, mapSize, colours, alphas, status, collapsed, ...pr
     globe: {
       current: 0,
       total: 80,
-    },
-    countries: {
-      active: false,
-      animating: false,
-      current: 0,
-      total: 120,
-      selected: null,
-      index: null,
-      timeout: null,
-      initialDuration: 5000,
-      duration: 2000,
     },
   });
 
@@ -221,10 +203,6 @@ function Globe({ globeRadius, mapSize, colours, alphas, status, collapsed, ...pr
       groupsRef.current.main.add(groupsRef.current.globe);
 
       addGlobeDots();
-
-      return () => {
-        sceneRef.current.remove(globeElementRef.current);
-      };
     };
 
     const animate = () => {
@@ -242,6 +220,7 @@ function Globe({ globeRadius, mapSize, colours, alphas, status, collapsed, ...pr
     animate();
 
     return () => {
+      sceneRef.current.remove(globeElementRef.current);
       cancelAnimationFrame(animationFrameRef.current);
       clean(sceneRef.current);
       rendererRef.current.dispose();
@@ -288,18 +267,6 @@ Globe.defaultProps = {
 const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
 const easeOutCubic = t => (--t) * t * t + 1;
 
-const returnSphericalCoordinates = (latitude, longitude, size, radius) => {
-  latitude = ((latitude - size.width) / size.width) * -180;
-  longitude = ((longitude - size.height) / size.height) * -90;
-
-  const outputRadius = Math.cos(longitude / 180 * Math.PI) * radius;
-  const x = Math.cos(latitude / 180 * Math.PI) * outputRadius;
-  const y = Math.sin(longitude / 180 * Math.PI) * radius;
-  const z = Math.sin(latitude / 180 * Math.PI) * outputRadius;
-
-  return { x, y, z };
-};
-
 const GlobeContainer = styled.div`
   position: absolute;
   top: 0;
@@ -319,6 +286,10 @@ const GlobeCanvas = styled.canvas.attrs(({ viewportSize, collapsed }) => ({
 }))`
   display: block;
   transition: transform 0.6s ${props => props.theme.curveFastoutSlowin};
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export default Globe;
