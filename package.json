@@ -18,7 +18,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "echo add some tests",
-    "deploy": "firebase deploy --only hosting",
+    "deploy": "aws s3 sync --delete build/ s3://hamish-portfolio-trueblue",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
