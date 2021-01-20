@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@reach/combobox": "^0.5.3",
-    "gsap": "^3.0.1",
+    "gsap": "^3.6.0",
     "react": "^16.11.0",
     "react-calendar": "^2.19.2",
     "react-dom": "^16.11.0",
