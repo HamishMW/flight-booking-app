@@ -12,7 +12,7 @@
     "react-scripts": "3.2.0",
     "react-transition-group": "^4.3.0",
     "styled-components": "^4.4.1",
-    "three": "^0.110.0"
+    "three": "^0.125.0"
   },
   "scripts": {
     "start": "react-scripts start",
